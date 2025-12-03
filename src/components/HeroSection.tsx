@@ -11,7 +11,7 @@ const socialLinks = [
 
 const HeroSection = () => {
   return (
-    <section className="relative min-h-screen flex items-center justify-center overflow-hidden px-4 pt-20 md:pt-0">
+    <section className="relative min-h-screen flex items-center justify-center overflow-hidden px-4 pt-20 md:pt-16 lg:pt-12">
       {/* Background Effects */}
       <div className="absolute inset-0 overflow-hidden">
         <div className="absolute top-1/4 left-1/4 w-64 md:w-96 h-64 md:h-96 bg-primary/20 rounded-full blur-3xl animate-pulse-slow" />

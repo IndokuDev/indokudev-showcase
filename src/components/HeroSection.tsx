@@ -1,6 +1,7 @@
 import { Github, Youtube, Instagram, MessageCircle } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import avatar from "@/assets/avatar.jpg";
+import { useEffect, useState } from "react";
 
 const socialLinks = [
   { icon: Github, href: "https://github.com/IndokuDev", label: "GitHub" },
@@ -9,7 +10,42 @@ const socialLinks = [
   { icon: MessageCircle, href: "https://wa.me/6285776445247", label: "WhatsApp" },
 ];
 
+const roles = [
+  "Minecraft Addon Creator",
+  "Content Creator",
+  "Web Developer",
+  "Student",
+];
+
 const HeroSection = () => {
+  const [currentRoleIndex, setCurrentRoleIndex] = useState(0);
+  const [displayText, setDisplayText] = useState("");
+  const [isDeleting, setIsDeleting] = useState(false);
+
+  useEffect(() => {
+    const currentRole = roles[currentRoleIndex];
+    const typeSpeed = isDeleting ? 50 : 100;
+
+    const timeout = setTimeout(() => {
+      if (!isDeleting) {
+        if (displayText.length < currentRole.length) {
+          setDisplayText(currentRole.slice(0, displayText.length + 1));
+        } else {
+          setTimeout(() => setIsDeleting(true), 2000);
+        }
+      } else {
+        if (displayText.length > 0) {
+          setDisplayText(displayText.slice(0, -1));
+        } else {
+          setIsDeleting(false);
+          setCurrentRoleIndex((prev) => (prev + 1) % roles.length);
+        }
+      }
+    }, typeSpeed);
+
+    return () => clearTimeout(timeout);
+  }, [displayText, isDeleting, currentRoleIndex]);
+
   return (
     <section className="relative min-h-screen flex items-center justify-center overflow-hidden px-4 pt-20 md:pt-16 lg:pt-12">
       {/* Background Effects */}
@@ -47,10 +83,18 @@ const HeroSection = () => {
           </p>
         </div>
 
+        {/* Typing Animation */}
+        <div className="animate-slide-up h-8 md:h-10" style={{ animationDelay: "0.2s" }}>
+          <p className="text-base md:text-xl text-primary font-mono">
+            {displayText}
+            <span className="animate-pulse">|</span>
+          </p>
+        </div>
+
         {/* Bio */}
-        <div className="animate-slide-up" style={{ animationDelay: "0.2s" }}>
-          <p className="text-base md:text-xl text-muted-foreground max-w-2xl mx-auto mb-6 md:mb-8 px-2">
-            Young Developer from Indonesia. Minecraft Addon Creator & Content Creator.
+        <div className="animate-slide-up" style={{ animationDelay: "0.25s" }}>
+          <p className="text-sm md:text-lg text-muted-foreground max-w-2xl mx-auto mb-6 md:mb-8 px-2">
+            Young Developer from Indonesia. Building cool stuff with code & creativity.
           </p>
         </div>
 

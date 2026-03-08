@@ -1,6 +1,7 @@
 import { useState, useEffect } from "react";
 import { Menu, X } from "lucide-react";
 import { Button } from "@/components/ui/button";
+import ThemeToggle from "@/components/ThemeToggle";
 
 const navLinks = [
   { href: "#about", label: "About" },
@@ -30,13 +31,11 @@ const Navbar = () => {
     >
       <div className="max-w-6xl mx-auto px-4">
         <div className="flex items-center justify-between h-16">
-          {/* Logo */}
           <a href="#" className="font-bold text-xl">
             <span className="text-gradient">Indoku</span>
             <span className="text-foreground">Dev</span>
           </a>
 
-          {/* Desktop Nav */}
           <div className="hidden md:flex items-center gap-8">
             {navLinks.map((link) => (
               <a
@@ -47,8 +46,9 @@ const Navbar = () => {
                 {link.label}
               </a>
             ))}
-            <Button 
-              size="sm" 
+            <ThemeToggle />
+            <Button
+              size="sm"
               className="bg-gradient-primary hover:opacity-90 transition-opacity text-primary-foreground"
               asChild
             >
@@ -58,18 +58,18 @@ const Navbar = () => {
             </Button>
           </div>
 
-          {/* Mobile Menu Button */}
-          <Button
-            variant="ghost"
-            size="icon"
-            className="md:hidden"
-            onClick={() => setIsMobileOpen(!isMobileOpen)}
-          >
-            {isMobileOpen ? <X className="w-5 h-5" /> : <Menu className="w-5 h-5" />}
-          </Button>
+          <div className="flex items-center gap-2 md:hidden">
+            <ThemeToggle />
+            <Button
+              variant="ghost"
+              size="icon"
+              onClick={() => setIsMobileOpen(!isMobileOpen)}
+            >
+              {isMobileOpen ? <X className="w-5 h-5" /> : <Menu className="w-5 h-5" />}
+            </Button>
+          </div>
         </div>
 
-        {/* Mobile Nav */}
         {isMobileOpen && (
           <div className="md:hidden py-4 border-t border-border/50">
             <div className="flex flex-col gap-4">
@@ -83,7 +83,7 @@ const Navbar = () => {
                   {link.label}
                 </a>
               ))}
-              <Button 
+              <Button
                 className="bg-gradient-primary hover:opacity-90 transition-opacity text-primary-foreground w-full mt-2"
                 asChild
               >

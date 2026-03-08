@@ -69,7 +69,7 @@ const Chatbot = () => {
           if (jsonStr === "[DONE]") break;
           try {
             const parsed = JSON.parse(jsonStr);
-            const content = parsed.choices?.[0]?.delta?.content;
+            const content = parsed.candidates?.[0]?.content?.parts?.[0]?.text;
             if (content) {
               assistantSoFar += content;
               setMessages((prev) => {

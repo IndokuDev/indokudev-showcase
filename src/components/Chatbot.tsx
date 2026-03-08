@@ -5,7 +5,7 @@ import ReactMarkdown from "react-markdown";
 
 type Msg = { role: "user" | "assistant"; content: string };
 
-const GEMINI_API_KEY = "AIzaSyDJR0o0OGbCOqhJCOJjJGBaff6ypxADaNA";
+const GEMINI_API_KEY = import.meta.env.VITE_GEMINI_API_KEY || "";
 const GEMINI_URL = `https://generativelanguage.googleapis.com/v1beta/models/gemini-2.5-flash-preview-05-20:streamGenerateContent?alt=sse&key=${GEMINI_API_KEY}`;
 
 const Chatbot = () => {

@@ -65,7 +65,7 @@ const ContactSection = () => {
         <div className="grid grid-cols-2 lg:grid-cols-3 gap-3 md:gap-4 mb-12">
           {contactMethods.map((method) => (
             <a
-              key={method.value}
+              key={method.label}
               href={method.href}
               target="_blank"
               rel="noopener noreferrer"
